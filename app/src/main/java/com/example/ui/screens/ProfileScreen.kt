@@ -275,49 +275,24 @@ fun ProfileScreen(
                     HorizontalDivider(color = CardBorder.copy(alpha = 0.8f))
                     Spacer(modifier = Modifier.height(14.dp))
 
-                    // Roll & Reg Copyable Chips
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    // Roll Copyable Chip
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = SoftBackground,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { copyToClipboard("Roll No", profile.rollNo) }
                     ) {
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = SoftBackground,
-                            modifier = Modifier
-                                .weight(1f)
-                                .clickable { copyToClipboard("Roll No", profile.rollNo) }
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Column {
-                                    Text("ROLL NO", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = MutedText)
-                                    Text(profile.rollNo, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = DarkText)
-                                }
-                                Icon(Icons.Default.ContentCopy, contentDescription = "Copy Roll", tint = MutedText, modifier = Modifier.size(15.dp))
+                            Column {
+                                Text("ROLL NO / STUDENT ID", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = MutedText)
+                                Text(profile.rollNo, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = DarkText)
                             }
-                        }
-
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = SoftBackground,
-                            modifier = Modifier
-                                .weight(1f)
-                                .clickable { copyToClipboard("Registration No", profile.regNo) }
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Column {
-                                    Text("REG NO", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = MutedText)
-                                    Text(profile.regNo, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = DarkText)
-                                }
-                                Icon(Icons.Default.ContentCopy, contentDescription = "Copy Reg", tint = MutedText, modifier = Modifier.size(15.dp))
-                            }
+                            Icon(Icons.Default.ContentCopy, contentDescription = "Copy Roll", tint = MutedText, modifier = Modifier.size(16.dp))
                         }
                     }
                 }
@@ -402,45 +377,6 @@ fun ProfileScreen(
                         )
                         Text(
                             text = "Weekly Periods",
-                            fontSize = 11.sp,
-                            color = MutedText
-                        )
-                    }
-                }
-
-                // Card 3: Total Marks
-                Surface(
-                    shape = RoundedCornerShape(20.dp),
-                    color = PureWhite,
-                    shadowElevation = 1.dp,
-                    modifier = Modifier
-                        .weight(1f)
-                        .clickable { onNavigateToSubjects() }
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Box(
-                            modifier = Modifier
-                                .size(32.dp)
-                                .clip(CircleShape)
-                                .background(PastelYellow),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Grade,
-                                contentDescription = null,
-                                tint = PastelYellowText,
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            text = "${routineState.subjects.sumOf { it.totalMarks }} Marks",
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = DarkText
-                        )
-                        Text(
-                            text = "BTEB 1st Sem ET",
                             fontSize = 11.sp,
                             color = MutedText
                         )
@@ -681,64 +617,7 @@ fun ProfileScreen(
             }
         }
 
-        // 7. App Download & GitHub Sync Card
-        item {
-            Surface(
-                shape = RoundedCornerShape(22.dp),
-                color = PureWhite,
-                shadowElevation = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(18.dp)
-                ) {
-                    Text(
-                        text = "APP DOWNLOAD & GITHUB SYNC",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MutedText,
-                        letterSpacing = 1.sp
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        Button(
-                            onClick = {
-                                val appUrl = "https://ais-pre-3m3xelewa7kw5weuggueda-313037971300.asia-southeast1.run.app"
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(appUrl))
-                                context.startActivity(intent)
-                            },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = BoldBlack)
-                        ) {
-                            Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text("Download APK", fontSize = 12.sp)
-                        }
-
-                        OutlinedButton(
-                            onClick = {
-                                val githubUrl = "https://github.com"
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(githubUrl))
-                                context.startActivity(intent)
-                            },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(14.dp)
-                        ) {
-                            Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text("GitHub Sync", fontSize = 12.sp)
-                        }
-                    }
-                }
-            }
-        }
 
         item {
             Spacer(modifier = Modifier.height(60.dp))
@@ -787,7 +666,7 @@ fun EditProfileDialog(
 ) {
     var name by remember { mutableStateOf(currentProfile.name) }
     var roll by remember { mutableStateOf(currentProfile.rollNo) }
-    var reg by remember { mutableStateOf(currentProfile.regNo) }
+    var session by remember { mutableStateOf(currentProfile.sessionYear) }
     var shift by remember { mutableStateOf(currentProfile.shift) }
     var group by remember { mutableStateOf(currentProfile.group) }
     var phone by remember { mutableStateOf(currentProfile.phone) }
@@ -818,27 +697,23 @@ fun EditProfileDialog(
                     shape = RoundedCornerShape(12.dp)
                 )
 
-                Row(
+                OutlinedTextField(
+                    value = roll,
+                    onValueChange = { roll = it },
+                    label = { Text("Roll No / ID No") },
+                    singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    OutlinedTextField(
-                        value = roll,
-                        onValueChange = { roll = it },
-                        label = { Text("Roll No") },
-                        singleLine = true,
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    OutlinedTextField(
-                        value = reg,
-                        onValueChange = { reg = it },
-                        label = { Text("Reg No") },
-                        singleLine = true,
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                }
+                    shape = RoundedCornerShape(12.dp)
+                )
+
+                OutlinedTextField(
+                    value = session,
+                    onValueChange = { session = it },
+                    label = { Text("Session Year") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -888,7 +763,7 @@ fun EditProfileDialog(
                         currentProfile.copy(
                             name = name.trim().ifEmpty { currentProfile.name },
                             rollNo = roll.trim().ifEmpty { currentProfile.rollNo },
-                            regNo = reg.trim().ifEmpty { currentProfile.regNo },
+                            sessionYear = session.trim().ifEmpty { currentProfile.sessionYear },
                             shift = shift.trim().ifEmpty { currentProfile.shift },
                             group = group.trim().ifEmpty { currentProfile.group },
                             phone = phone.trim().ifEmpty { currentProfile.phone },

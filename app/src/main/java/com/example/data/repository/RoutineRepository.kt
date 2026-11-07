@@ -118,6 +118,7 @@ class RoutineRepository(private val context: Context) {
             .putString("profile_group", profile.group)
             .putString("profile_phone", profile.phone)
             .putString("profile_email", profile.email)
+            .putString("profile_session", profile.sessionYear)
             .apply()
     }
 
@@ -230,9 +231,9 @@ class RoutineRepository(private val context: Context) {
 
     private fun loadStudentProfile(): com.example.data.model.StudentProfile {
         return com.example.data.model.StudentProfile(
-            name = prefs.getString("profile_name", "Mahodi Billa") ?: "Mahodi Billa",
-            rollNo = prefs.getString("profile_roll", "642109") ?: "642109",
-            regNo = prefs.getString("profile_reg", "1502489123") ?: "1502489123",
+            name = prefs.getString("profile_name", "MB Mahodi") ?: "MB Mahodi",
+            rollNo = prefs.getString("profile_roll", "26566828") ?: "26566828",
+            regNo = prefs.getString("profile_reg", "26566828") ?: "26566828",
             department = "1st Electronics Technology",
             semester = "1st Semester",
             shift = prefs.getString("profile_shift", "1st Shift") ?: "1st Shift",
@@ -241,7 +242,7 @@ class RoutineRepository(private val context: Context) {
             campus = "1 Sobhanbag, Mirpur Road, Dhaka 1207",
             email = prefs.getString("profile_email", "mahodibilla106@gmail.com") ?: "mahodibilla106@gmail.com",
             phone = prefs.getString("profile_phone", "+8801713-493158") ?: "+8801713-493158",
-            sessionYear = "August 2026 - January 2027",
+            sessionYear = prefs.getString("profile_session", "2026-2027") ?: "2026-2027",
             guideTeacher = "Eng. Abdullah Al Nisat (0177235524)"
         )
     }
