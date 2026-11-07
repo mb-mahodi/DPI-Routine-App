@@ -1,0 +1,6 @@
+{
+  "name": "DPI Routine",
+  "description": "Daffodil Polytechnic Institute (DPI) 1st Semester Electronics Technology official class routine, subject marks, teacher directory, and live Google Sheet sync companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
