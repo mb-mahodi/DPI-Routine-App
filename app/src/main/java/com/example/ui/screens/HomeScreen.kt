@@ -231,39 +231,7 @@ fun HomeScreen(
                     }
                 }
 
-                // Notification Bell with badge "2"
-                Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(CircleShape)
-                        .background(PureWhite)
-                        .clickable { showNotificationDialog = true },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.NotificationsNone,
-                        contentDescription = "Notifications",
-                        tint = DarkText,
-                        modifier = Modifier.size(23.dp)
-                    )
-                    // Badge 2
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.TopEnd)
-                            .offset(x = 1.dp, y = (-1).dp)
-                            .size(16.dp)
-                            .clip(CircleShape)
-                            .background(BoldBlack),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "3",
-                            color = PureWhite,
-                            fontSize = 9.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
+
             }
 
             Spacer(modifier = Modifier.height(8.dp))
