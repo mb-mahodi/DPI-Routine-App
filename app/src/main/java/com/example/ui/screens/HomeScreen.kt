@@ -688,6 +688,11 @@ fun HomeScreen(
             }
         }
 
+        // 6. Home Screen Widgets Showcase Card
+        item {
+            HomeScreenWidgetCard(viewModel = viewModel)
+        }
+
         item {
             Spacer(modifier = Modifier.height(60.dp))
         }
@@ -989,6 +994,198 @@ fun HomeBreakPillRow(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun HomeScreenWidgetCard(
+    viewModel: RoutineViewModel
+) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var showWidgetDialog by remember { mutableStateOf(false) }
+
+    Card(
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E242B)),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { showWidgetDialog = true }
+            .testTag("home_screen_widget_card")
+    ) {
+        Column(
+            modifier = Modifier.padding(18.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFF3B82F6).copy(alpha = 0.2f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Widgets,
+                            contentDescription = "Widgets",
+                            tint = Color(0xFF60A5FA),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column {
+                        Text(
+                            text = "HOME SCREEN WIDGETS",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF9CA3AF),
+                            letterSpacing = 1.sp
+                        )
+                        Text(
+                            text = "হোম স্ক্রিন উইজেট যুক্ত করুন",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = Color(0xFF3B82F6)
+                ) {
+                    Text(
+                        text = "Setup >",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "Add the live DPI Routine widget to your mobile home screen to see active classes, room numbers, and completed/left count directly on your launcher without opening the app!",
+                fontSize = 12.sp,
+                color = Color(0xFFD1D5DB)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "• 4x2 Detailed Routine Widget  • 2x2 Quick Stats Widget",
+                    fontSize = 11.sp,
+                    color = Color(0xFF9CA3AF),
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+    }
+
+    if (showWidgetDialog) {
+        AlertDialog(
+            onDismissRequest = { showWidgetDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Widgets,
+                        contentDescription = null,
+                        tint = Color(0xFF2563EB),
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Android Home Screen Widgets",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    )
+                }
+            },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        text = "ফোনের হোম স্ক্রিনে DPI রুটিন উইজেট যুক্ত করার নিয়ম:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        color = DarkText
+                    )
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = PastelBlue,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            Text(
+                                text = "📱 How to add manually:",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = PastelBlueText
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "1. Long press on an empty space on your phone home screen.\n2. Tap 'Widgets'.\n3. Scroll down to 'DPI Routine'.\n4. Touch and drag the widget to your home screen!",
+                                fontSize = 11.sp,
+                                color = DarkText
+                            )
+                        }
+                    }
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = PastelGreen,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            Text(
+                                text = "✨ Available Widget Sizes:",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = PastelGreenText
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "• 4x2 Today Routine Widget: Shows live period, progress bar, active & next class details with room and teacher name.\n• 2x2 Quick Stats Widget: Compact widget for Done/Left class counts.",
+                                fontSize = 11.sp,
+                                color = DarkText
+                            )
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        try {
+                            com.example.widget.TodayRoutineWidgetProvider.updateAllWidgets(context)
+                            com.example.widget.QuickStatsWidgetProvider.updateAllWidgets(context)
+                        } catch (_: Exception) {}
+                        showWidgetDialog = false
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = BoldBlack),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Sync Widgets")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showWidgetDialog = false }) {
+                    Text("Close")
+                }
+            },
+            containerColor = PureWhite,
+            shape = RoundedCornerShape(22.dp)
+        )
     }
 }
 

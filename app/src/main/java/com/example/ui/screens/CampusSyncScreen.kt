@@ -186,6 +186,261 @@ fun CampusSyncScreen(
             }
         }
 
+        // App Download (APK Link) Card
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("app_download_card"),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(18.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(36.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.GetApp,
+                                        contentDescription = null,
+                                        tint = Color.White,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Text(
+                                    text = "Download App & Share Link",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Text(
+                                    text = "DPI Routine Android App (.apk)",
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = GreenTheory.copy(alpha = 0.15f)
+                        ) {
+                            Text(
+                                text = "v1.0 • APK Ready",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = GreenTheory,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "Open the web app link directly or download/install APK on any Android device.",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                val appUrl = "https://ais-pre-3m3xelewa7kw5weuggueda-313037971300.asia-southeast1.run.app"
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(appUrl))
+                                context.startActivity(intent)
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("download_apk_button"),
+                            contentPadding = PaddingValues(vertical = 10.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Download,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Download APK / App", fontSize = 12.sp)
+                        }
+
+                        OutlinedButton(
+                            onClick = {
+                                val appUrl = "https://ais-pre-3m3xelewa7kw5weuggueda-313037971300.asia-southeast1.run.app"
+                                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_SUBJECT, "DPI Routine App")
+                                    putExtra(Intent.EXTRA_TEXT, "Download DPI Routine 1st Sem ET App: $appUrl")
+                                }
+                                context.startActivity(Intent.createChooser(shareIntent, "Share App Link"))
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("share_app_link_button"),
+                            contentPadding = PaddingValues(vertical = 10.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Share,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Share App Link", fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
+
+        // GitHub Sync & Repository Card
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("github_sync_card"),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(18.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                modifier = Modifier.size(36.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.Code,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.surface,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Text(
+                                    text = "GitHub Source Code Sync",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = "Repository & Project Export",
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                                )
+                            }
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                        ) {
+                            Text(
+                                text = "GitHub Sync",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "To sync or push code to GitHub: Click on the top-right Settings/Export menu in Google AI Studio and select 'Push to GitHub' or 'Export ZIP'.",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        lineHeight = 16.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                val githubUrl = "https://github.com"
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(githubUrl))
+                                context.startActivity(intent)
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("open_github_repo_button"),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onSurface),
+                            contentPadding = PaddingValues(vertical = 10.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Code,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Open GitHub", fontSize = 12.sp)
+                        }
+
+                        OutlinedButton(
+                            onClick = {
+                                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_SUBJECT, "DPI Routine Source Code")
+                                    putExtra(Intent.EXTRA_TEXT, "DPI Routine Project - AI Studio Applet ID: a4122ec7-373d-4f88-8631-51237c02f2e8")
+                                }
+                                context.startActivity(Intent.createChooser(shareIntent, "Share Source Code Info"))
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("share_github_info_button"),
+                            contentPadding = PaddingValues(vertical = 10.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ContentCopy,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Copy Info", fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
+
         // Campus Location & Institute Details
         item {
             Card(

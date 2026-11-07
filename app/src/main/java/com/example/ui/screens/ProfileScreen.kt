@@ -681,6 +681,65 @@ fun ProfileScreen(
             }
         }
 
+        // 7. App Download & GitHub Sync Card
+        item {
+            Surface(
+                shape = RoundedCornerShape(22.dp),
+                color = PureWhite,
+                shadowElevation = 1.dp,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(18.dp)
+                ) {
+                    Text(
+                        text = "APP DOWNLOAD & GITHUB SYNC",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MutedText,
+                        letterSpacing = 1.sp
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                val appUrl = "https://ais-pre-3m3xelewa7kw5weuggueda-313037971300.asia-southeast1.run.app"
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(appUrl))
+                                context.startActivity(intent)
+                            },
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = BoldBlack)
+                        ) {
+                            Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Download APK", fontSize = 12.sp)
+                        }
+
+                        OutlinedButton(
+                            onClick = {
+                                val githubUrl = "https://github.com"
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(githubUrl))
+                                context.startActivity(intent)
+                            },
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(14.dp)
+                        ) {
+                            Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("GitHub Sync", fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
+
         item {
             Spacer(modifier = Modifier.height(60.dp))
         }

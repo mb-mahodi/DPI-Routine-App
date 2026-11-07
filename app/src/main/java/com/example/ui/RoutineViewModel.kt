@@ -221,6 +221,11 @@ class RoutineViewModel(application: Application) : AndroidViewModel(application)
             totalTodayCount = todayClasses.size,
             currentMinutes = currentMinutes
         )
+
+        try {
+            com.example.widget.TodayRoutineWidgetProvider.updateAllWidgets(getApplication())
+            com.example.widget.QuickStatsWidgetProvider.updateAllWidgets(getApplication())
+        } catch (_: Exception) {}
     }
 
     fun parseTimeToMinutes(timeStr: String): Int {

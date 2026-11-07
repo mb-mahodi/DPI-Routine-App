@@ -23,6 +23,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name="com.example.widget.TodayRoutineWidgetProvider"
+            android:exported="true"
+            android:label="DPI Today Routine Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.widget.ACTION_REFRESH_ROUTINE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/routine_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name="com.example.widget.QuickStatsWidgetProvider"
+            android:exported="true"
+            android:label="DPI Quick Stats Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/quick_stats_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
